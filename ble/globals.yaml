@@ -1,0 +1,10 @@
+globals:
+  - id: pkt_1
+    type: std::vector<uint8_t>
+    initial_value: 'std::vector<uint8_t>{}'
+  - id: pkt_2
+    type: std::vector<uint8_t>
+    initial_value: 'std::vector<uint8_t>{}'
+  - id: last_cmd_time
+    type: uint32_t
+    initial_value: '0'
