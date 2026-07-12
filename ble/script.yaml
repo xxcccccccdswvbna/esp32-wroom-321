@@ -1,0 +1,51 @@
+script:
+  #########################################################################
+  # BLE统一发送器(V2)
+  #########################################################################
+  - id: ble_send
+    mode: restart
+
+    parameters:
+      cmd: int
+
+    then:
+      # 如果正在发送，则退出
+      - if:
+          condition:
+            lambda: |-
+              return id(ble_busy);
+          then:
+            - lambda: |-
+                id(pending_cmd) = cmd;
+                id(has_pending_cmd) = true;
+            - stop:
+
+      # 标记忙碌
+      - lambda: |-
+          id(ble_busy) = true;
+
+      # 记录时间
+      - lambda: |-
+          id(last_ble_send) = millis();
+
+      ########################################################
+      # 这里暂时什么都不发
+      # 下一步接BLE广播
+      ########################################################
+
+      - delay: 250ms
+
+      # 解除忙碌
+      - lambda: |-
+          id(ble_busy) = false;
+
+      # 有等待命令则再次发送
+      - if:
+          condition:
+            lambda: |-
+              return id(has_pending_cmd);
+          then:
+            - lambda: |-
+                int c = id(pending_cmd);
+                id(has_pending_cmd) = false;
+                id(ble_send).execute(c);
