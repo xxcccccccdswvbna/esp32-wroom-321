@@ -1,0 +1,9 @@
+script:
+  - id: ble_send
+    mode: restart
+    then:
+      - lambda: 'id(ble_server).set_manufacturer_data(id(pkt_1));'
+      - delay: 150ms
+      - lambda: 'id(ble_server).set_manufacturer_data(id(pkt_2));'
+      - delay: 50ms
+      - lambda: 'id(ble_server).set_manufacturer_data({});'
