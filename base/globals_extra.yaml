@@ -1,9 +1,42 @@
 globals:
+  # 恢复出厂标志
   - id: do_factory_reset
     type: bool
     restore_value: no
-    initial_value: 'false'
+    initial_value: "false"
+
+  # 安全模式点击计数
   - id: safe_mode_tap_count
     type: int
     restore_value: no
-    initial_value: '0'
+    initial_value: "0"
+
+  # 是否正在发送蓝牙
+  - id: ble_busy
+    type: bool
+    restore_value: no
+    initial_value: "false"
+
+  # 上一次发送时间(ms)
+  - id: last_ble_send
+    type: uint32_t
+    restore_value: no
+    initial_value: "0"
+
+  # 待发送命令
+  - id: pending_cmd
+    type: int
+    restore_value: no
+    initial_value: "-1"
+
+  # 是否有待发送命令
+  - id: has_pending_cmd
+    type: bool
+    restore_value: no
+    initial_value: "false"
+
+  # 巴法云连接状态
+  - id: bemfa_online
+    type: bool
+    restore_value: no
+    initial_value: "false"
